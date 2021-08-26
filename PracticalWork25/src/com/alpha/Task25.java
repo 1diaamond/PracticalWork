@@ -5,6 +5,7 @@ public class Task25 {
 //        new com.alpha.work1.Runner().run();
 //        new com.alpha.work2.Runner().run();
 //        new com.alpha.work3.Runner().run();
-        new com.alpha.work4.Runner().run();
+//        new com.alpha.work4.Runner().run();
+        new com.alpha.work5.Runner().run();
     }
 }
