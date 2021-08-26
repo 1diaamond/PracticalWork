@@ -1,5 +1,9 @@
 package com.alpha.work3;
 
+import com.alpha.work1.DaysOfWeek;
+
+import java.util.Arrays;
+
 public class TrainSchedule {
     private Train[] trains;
     private int index;
@@ -25,6 +29,17 @@ public class TrainSchedule {
         for (Train t:trains
              ) {
             System.out.println(t);
+        }
+    }
+
+    public void searchTrains (String station , DaysOfWeek Day){
+        for (Train t: trains) {
+            if (t.getStationArrival() != null
+                    && t.getDays() != null
+                    && t.getStationArrival().equals(station)
+                    && Arrays.asList(t.getDays()).contains(Day)) {
+                System.out.println("I found a train: " + t);
+            }
         }
     }
 }
