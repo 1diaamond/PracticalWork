@@ -1,4 +1,4 @@
-package com.alpha.task12;
+package com.alpha.task1;
 
 public class Runner {
     public void run(){
