@@ -1,4 +1,4 @@
-package com.alpha.task1;
+package com.alpha.task12;
 
 public class MyTestMethod {
     public static <T extends Number> int calcNum ( T[] array , T maxValue ){
