@@ -1,16 +1,18 @@
 package com.alpha.work1;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Runner {
     public void run() {
-        List<Integer> integers= Arrays.asList(new Runner().arrayCreator());
+        Runner runner = new Runner();
+        List<Integer> integers= Arrays.asList(runner.arrayCreator());
         System.out.println(integers);
         Collections.sort(integers, (a,b) -> b.compareTo(a));
         System.out.println(integers);
+        List<String> stringList = runner.listCreator();
+        System.out.println(stringList);
+        Collections.sort(stringList, (a,b) -> b.compareTo(a));
+        System.out.println(stringList);
 
     }
 
@@ -21,6 +23,20 @@ public class Runner {
             integers[i] = random.nextInt(100) - 50;
         }
         return integers;
+    }
+
+    private List<String> listCreator(){
+        Random random = new Random();
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            char[] word = new char[random.nextInt(5)+5];
+            for(int j = 0; j < word.length; j++)
+            {
+                word[j] = (char)('a' + random.nextInt(26));
+            }
+            list.add(new String(word));
+        }
+        return list;
     }
 
 
