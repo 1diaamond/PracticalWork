@@ -1,6 +1,7 @@
 package com.alpha.work1;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class Runner {
     public void run() {
@@ -13,6 +14,13 @@ public class Runner {
         System.out.println(stringList);
         Collections.sort(stringList, (a,b) -> b.compareTo(a));
         System.out.println(stringList);
+
+        System.out.println(" Sum method result: ");
+        Integer[] integers1 = {1,2,3,4,5,6,7,8,9,10};
+        System.out.println(sumEven(integers1, (x) -> x%2==0 ));
+
+        System.out.println(" Print method result: ");
+        printStr(stringList,(s -> s.startsWith("x")));
 
     }
 
@@ -38,6 +46,23 @@ public class Runner {
         }
         return list;
     }
+    
+    private Integer sumEven (Integer[] integers, Predicate<Integer> isEven){
+        int result = 0;
+        for (int i : integers) {
+            if (isEven.test(i)){
+                result+=i;
+            }
+        }
+        return result;
+    }
 
+    private void printStr(List<String>strings, Predicate<String> predicate){
+        for (String s : strings) {
+            if (predicate.test(s)){
+                System.out.println(s);
+            }
+        }
+    }
 
 }
