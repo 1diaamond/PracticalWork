@@ -6,10 +6,12 @@ import java.util.function.Predicate;
 public class Runner {
     public void run() {
         Runner runner = new Runner();
+
         List<Integer> integers= Arrays.asList(runner.arrayCreator());
         System.out.println(integers);
         Collections.sort(integers, (a,b) -> b.compareTo(a));
         System.out.println(integers);
+
         List<String> stringList = runner.listCreator();
         System.out.println(stringList);
         Collections.sort(stringList, (a,b) -> b.compareTo(a));
