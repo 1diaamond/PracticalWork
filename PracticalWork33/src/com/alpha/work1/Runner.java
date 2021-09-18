@@ -2,6 +2,7 @@ package com.alpha.work1;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Runner {
     public void run() {
@@ -25,6 +26,12 @@ public class Runner {
         System.out.println(" Print method result: ");
         printStr(stringList,(s -> s.startsWith("x")));
 
+        List<String> list = Arrays.asList("qwerty", "abraCadabRa", "xyz", "     ", "WORD");
+        System.out.println(list);
+        System.out.println(updateList(list, str -> {
+            if (MyConverter.isNull(str)){ return null; }
+            else return str.toUpperCase();}));
+        System.out.println(list.stream().map(String::toLowerCase).collect(Collectors.toList()));
     }
 
     private Integer[] arrayCreator(){
