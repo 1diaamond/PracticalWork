@@ -8,6 +8,7 @@ public class Runner {
         Runner runner = new Runner();
 
         List<Integer> integers= Arrays.asList(runner.arrayCreator());
+        integers.forEach(s -> System.out.println(s));
         System.out.println(integers);
         Collections.sort(integers, (a,b) -> b.compareTo(a));
         System.out.println(integers);
@@ -67,4 +68,11 @@ public class Runner {
         }
     }
 
+    public List<String> updateList (List<String> list , MyConverter converter) {
+        List<String> stringList= new ArrayList<>();
+        for (String s:list) {
+            stringList.add(converter.convertStr(s));
+        }
+        return stringList;
+    }
 }
