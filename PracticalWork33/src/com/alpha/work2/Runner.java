@@ -26,6 +26,10 @@ public class Runner {
         people.stream()
                 .filter(person -> person.getGender().equalsIgnoreCase("male") && person.getAge() >= 18 && person.getAge() <= 27 )
                 .forEach(person -> System.out.println(person));
+
+        System.out.println(people.stream()
+                .filter(person -> person.getGender().equalsIgnoreCase("female"))
+                .mapToDouble(p-> p.getAge()).average().getAsDouble());
     }
 
 
