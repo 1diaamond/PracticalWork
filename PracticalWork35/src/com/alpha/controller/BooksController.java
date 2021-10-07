@@ -24,6 +24,7 @@ import com.alpha.view.InputDataView;
 import com.alpha.view.ViewConstants;
 
 public class BooksController {
+
     private InputDataView inputDataView;
     private BooksView booksView;
     private ServiceBooks serviceBooks;
@@ -38,12 +39,27 @@ public class BooksController {
         while (true){
             booksView.printMenu();
             booksView.printMessage(ViewConstants.ENTER_COMMAND);
-            String command = inputDataView.getCommand();
+            String command = inputDataView.getParams();
             switch (command) {
                 case "view" :
                     serviceBooks.printBooks(serviceBooks.getAllBooks());
                     booksView.printMessage(ViewConstants.DEVIDER);
                     break;
+                case "add" :
+                    booksView.printMessage(ViewConstants.ENTER_BOOK_PARAMS);
+                    serviceBooks.addBook(inputDataView.getParams());
+                    booksView.printMessage(ViewConstants.BOOKADDED);
+                    serviceBooks.printBooks(serviceBooks.getAllBooks());
+                    booksView.printMessage(ViewConstants.DEVIDER);
+                    break;
+                case "edit" :
+                    booksView.printMessage(ViewConstants.ENTER_CHANGE_COST_PARAMS);
+                    serviceBooks.changeBookCost(inputDataView.getParams());
+                    booksView.printMessage(ViewConstants.COSTCHANGED);
+                    serviceBooks.printBooks(serviceBooks.getAllBooks());
+                    booksView.printMessage(ViewConstants.DEVIDER);
+                    break;
+
             }
         }
     }

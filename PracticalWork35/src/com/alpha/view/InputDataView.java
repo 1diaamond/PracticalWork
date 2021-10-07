@@ -13,7 +13,7 @@ public class InputDataView {
         this.sc = new Scanner(System.in);
     }
 
-    public String getCommand() {
+    public String getParams() {
         return sc.nextLine();
     }
 }

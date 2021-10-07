@@ -1,9 +1,9 @@
 package com.alpha.model;
 
 import com.alpha.model.entity.Book;
+import com.alpha.model.utils.ParamsParser;
+import com.alpha.model.utils.BookToStringConverter;
 import com.alpha.view.BooksView;
-import com.alpha.view.ViewConstants;
-
 import java.util.List;
 
 /*
@@ -18,12 +18,13 @@ import java.util.List;
  завершить работу.
  */
 public class ServiceBooks {
-    private List<Book> bookList ;
+    protected List<Book> bookList ;
     private BooksView booksView;
+    private static final String WRONG_COST_OPERATION = "Wrong COST operation ,please choose one of legal operations : \n \" + \" или \" - \" ";
+    private static final String WRONG_ID = "Wrong ID! please , enter correct value";
 
     public ServiceBooks() {
         this.bookList = SourceBooks.getBooksList();
-        this.booksView = new BooksView();
     }
 
     public List <String> getAllBooks(){
@@ -34,21 +35,34 @@ public class ServiceBooks {
         booksString.forEach(System.out::println);
     }
 
-    public void addBook(String author, String title, String publisher, int year, int page, double cost){
-        bookList.add( new Book( author,  title,  publisher,  year,  page,  cost));
+    public void addBook(String bookParamsString){
+        List<String> bookParams = ParamsParser.parseParams(bookParamsString);
+        Book book = new Book( Validator.validateAuthor(bookParams.get(0))
+                ,  Validator.validateTitle(bookParams.get(1))
+                ,  Validator.validatePublisher(bookParams.get(2))
+                ,  Validator.validateYear(bookParams.get(3))
+                ,  Validator.validatePage(bookParams.get(4))
+                , Validator.validateCost(bookParams.get(5)) );
+        bookList.add(book);
     }
-    public void changeBookCost(int bookId, String action , int pricePercent) {
+    public void changeBookCost(String costParamsString) {
+        List <String> changeBookCostParams = ParamsParser.parseParams(costParamsString);
+        int bookId = Validator.validateId(changeBookCostParams.get(0));
+        if (bookId < bookList.size()){
+        String action = Validator.validateAction(changeBookCostParams.get(1));
+        int pricePercent = Validator.validatePercent(changeBookCostParams.get(2));
         double newPrice;
         double oldPrice = bookList.get(bookId).getCost();
-        if (action.equals("увеличить")){
-            newPrice = oldPrice + (oldPrice/100*pricePercent);
-        }else if (action.equals("уменьшить);")){
-            newPrice = oldPrice - (oldPrice/100*pricePercent);
+        if (action.equals("+")){ newPrice = oldPrice + (oldPrice/100*pricePercent);
+        }else if (action.equals("-")){ newPrice = oldPrice - (oldPrice/100*pricePercent);
         }else {
             newPrice = oldPrice;
-            booksView.printMessage(ViewConstants.WRONG_COST_OPERATION);
+            System.out.println(WRONG_COST_OPERATION);
         }
-        bookList.get(bookId).setCost(newPrice);
+        bookList.get(bookId).setCost(newPrice);}
+        else throw new IllegalArgumentException(WRONG_ID);
     }
 
 }
+
+
